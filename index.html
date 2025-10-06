@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fish Burger Essaouira - Ocean's Treasure</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #06d6a0;
+            --accent: #f59e0b;
+            --dark: #0f172a;
+            --darker: #020617;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --gray-light: #cbd5e1;
+            --white: #ffffff;
+            --black: #000000;
+            
+            --gradient-primary: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            --gradient-hero: linear-gradient(135deg, var(--darker), var(--dark));
+            --gradient-accent: linear-gradient(135deg, var(--accent), #eab308);
+            
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            
+            --border-radius: 12px;
+            --border-radius-lg: 20px;
+            --border-radius-xl: 30px;
+            
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--white);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: var(--shadow-lg);
+            padding: 0.75rem 0;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.2rem;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-link {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .btn-reservation {
+            background: var(--gradient-primary);
+            color: var(--white);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-reservation:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .bar {
+            width: 25px;
+            height: 2px;
+            background: var(--dark);
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: var(--gradient-hero);
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.4);
+        }
+
+        .hero-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text {
+            color: var(--white);
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .title-line {
+            display: block;
+        }
+
+        .title-line.accent {
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-desc {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: var(--white);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .hero-visual {
+            position: relative;
+        }
+
+        .floating-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: var(--border-radius-lg);
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(1deg); }
+        }
+
+        .card-main {
+            position: relative;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .hero-burger-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--gradient-accent);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .card-details h3 {
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent);
+        }
+
+        .rating span {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.875rem;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.3);
+            margin: 0 auto 0.5rem;
+            animation: scrollLine 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollLine {
+            0%, 100% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(10px); opacity: 0.5; }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: var(--gradient-primary);
+            color: var(--white);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .section-desc {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Enhanced Gallery Section */
+        .gallery-section {
+            padding: 6rem 0;
+            background: var(--light);
+        }
+
+        .gallery-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--white);
+            border: 1px solid var(--gray-light);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            cursor: pointer;
+            aspect-ratio: 1 / 1;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-content h4 {
+            color: var(--white);
+            margin-bottom: 0.5rem;
+            font-size: 1.25rem;
+        }
+
+        .gallery-content p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        /* Lightbox Modal */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: var(--white);
+            color: var(--dark);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: var(--transition);
+        }
+
+        .lightbox-close:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 1rem;
+        }
+
+        .lightbox-prev, .lightbox-next {
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+
+        .lightbox-prev:hover, .lightbox-next:hover {
+            background: var(--primary);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 6rem 0;
+            background: var(--white);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info .section-title {
+            text-align: left;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info .section-desc {
+            text-align: left;
+            margin: 0 0 2rem 0;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .contact-text h4 {
+            color: var(--dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-text p {
+            color: var(--dark);
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-text span {
+            color: var(--gray);
+            font-size: 0.875rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: var(--light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .contact-form-container {
+            background: var(--light);
+            padding: 2.5rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .contact-form h3 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--dark);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 1rem;
+            border: 1px solid var(--gray-light);
+            border-radius: var(--border-radius);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--darker);
+            color: var(--white);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-main {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .footer-desc {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .link-group h4 {
+            color: var(--white);
+            margin-bottom: 1rem;
+            font-size: 1.125rem;
+        }
+
+        .link-group a,
+        .link-group span {
+            display: block;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .link-group a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-copyright {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.875rem;
+        }
+
+        .footer-copyright i {
+            color: #ef4444;
+        }
+
+        .footer-payments {
+            display: flex;
+            gap: 1rem;
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Enhanced Responsive Design */
+        @media (max-width: 1024px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                transition: left 0.3s ease;
+                box-shadow: var(--shadow-lg);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active .bar:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active .bar:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-links {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">
+                <div class="logo-icon">
+                    <i class="fas fa-fish"></i>
+                </div>
+                <span class="logo-text">Fish Burger Essaouira</span>
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#gallery" class="nav-link">Gallery</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="btn-reservation" onclick="scrollToSection('contact')">Reserve Table</button>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <div class="hero-overlay"></div>
+            <div class="hero-particles" id="heroParticles"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-badge">Premium Fish Burgers</div>
+                <h1 class="hero-title">
+                    <span class="title-line">Ocean's Fresh</span>
+                    <span class="title-line accent">Culinary Experience</span>
+                </h1>
+                <p class="hero-desc">Experience the perfect fusion of Moroccan coastal flavors and modern gourmet craftsmanship in every bite</p>
+                <div class="hero-actions">
+                    <a href="#gallery" class="btn-primary">
+                        <span>View Gallery</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                    <button class="btn-secondary">
+                        <i class="fas fa-play"></i>
+                        <span>Watch Story</span>
+                    </button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Daily Fresh Catch</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">4.9</div>
+                        <div class="stat-label">Customer Rating</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">2018</div>
+                        <div class="stat-label">Established</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="floating-card">
+                    <div class="card-main">
+                        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80" alt="Signature Fish Burger" class="hero-burger-img">
+                        <div class="card-badge">Chef's Special</div>
+                    </div>
+                    <div class="card-details">
+                        <h3>Signature Ocean Burger</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>4.9 (128 reviews)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-line"></div>
+            <span>Scroll to explore</span>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">Gallery</div>
+                <h2 class="section-title">Visual Feast</h2>
+                <p class="section-desc">Discover the artistry behind every dish</p>
+            </div>
+            
+            <div class="gallery-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="burgers">Burgers</button>
+                <button class="filter-btn" data-filter="restaurant">Restaurant</button>
+                <button class="filter-btn" data-filter="ingredients">Ingredients</button>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item" data-category="burgers">
+                    <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80" alt="Signature Fish Burger">
+                    <div class="gallery-overlay">
+                        <div class="gallery-content">
+                            <h4>Signature Ocean Burger</h4>
+                            <p>Our most popular creation with fresh Atlantic fish</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="burgers">
+                    <img src="https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2015&q=80" alt="Classic Fish Burger">
+                    <div class="gallery-overlay">
+                        <div class="gallery-content">
+                            <h4>Classic Fish Burger</h4>
+                            <p>Fresh white fish fillet with tartar sauce</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="restaurant">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipPXRQJVup5QXseiFmv9TlwXLh7gzB7TAz-8EHTd=s680-w680-h510-rw" alt="Restaurant Interior">
+                    <div class="gallery-overlay">
+                        <div class="gallery-content">
+                            <h4>Coastal Ambiance</h4>
+                            <p>Modern dining experience in Essaouira</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="ingredients">
+                    <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80" alt="Fresh Ingredients">
+                    <div class="gallery-overlay">
+                        <div class="gallery-content">
+                            <h4>Fresh Ingredients</h4>
+                            <p>Locally sourced produce from Essaouira</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="burgers">
+                    <img src="https://images.unsplash.com/photo-1551782450-17144efb9c50?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80" alt="Spicy Salmon Burger">
+                    <div class="gallery-overlay">
+                        <div class="gallery-content">
+                            <h4>Spicy Salmon Delight</h4>
+                            <p>Grilled salmon with wasabi mayo</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="restaurant">
+                    <img src="https://www.lespetitesexperiences.com/wp-content/uploads/2024/09/Fish-burger-restaurant-essaouira-maroc.jpg" alt="Restaurant Ambiance">
+                    <div class="gallery-overlay">
+                        <div class="gallery-content">
+                            <h4></h4>
+                            <p>Enjoy your meal with Atlantic views</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="ingredients">
+                    <img src="https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Fresh Fish Market">
+                    <div class="gallery-overlay">
+                        <div class="gallery-content">
+                            <h4>Daily Fresh Catch</h4>
+                            <p>Direct from local fishermen to your plate</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightboxClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <img src="" alt="" class="lightbox-img" id="lightboxImg">
+            <div class="lightbox-nav">
+                <button class="lightbox-prev" id="lightboxPrev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="lightbox-next" id="lightboxNext">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="section-header">
+                        <div class="section-badge">Visit Us</div>
+                        <h2 class="section-title">Experience Coastal Dining</h2>
+                        <p class="section-desc">Reserve your table for an unforgettable culinary journey</p>
+                    </div>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Location</h4>
+                                <p>1 Rue de Tanger, Essaouira 44000 , Morocco</p>
+                                <span>Near the fishing port with ocean view</span>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Opening Hours</h4>
+                                <p>Monday - Sunday: 11:00 AM - 11:00 PM</p>
+                                <span>Kitchen closes at 10:30 PM</span>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Reservations</h4>
+                                <p>+212 5XX-XXXXXX</p>
+                                <span>Call or WhatsApp for booking</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-tripadvisor"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="contact-form-container">
+                    <form class="contact-form" method="POST" onsubmit="handleFormSubmit(event)">
+                        <h3>Make a Reservation</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" placeholder="+212 XXX-XXXXXX" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="date">Reservation Date</label>
+                                <input type="date" id="date" name="date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="time">Time</label>
+                                <select id="time" name="time" required>
+                                    <option value="">Select time</option>
+                                    <option value="11:00">11:00 AM</option>
+                                    <option value="12:00">12:00 PM</option>
+                                    <option value="13:00">1:00 PM</option>
+                                    <option value="14:00">2:00 PM</option>
+                                    <option value="18:00">6:00 PM</option>
+                                    <option value="19:00">7:00 PM</option>
+                                    <option value="20:00">8:00 PM</option>
+                                    <option value="21:00">9:00 PM</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="guests">Number of Guests</label>
+                                <select id="guests" name="guests" required>
+                                    <option value="">Select guests</option>
+                                    <option value="1">1 Person</option>
+                                    <option value="2">2 People</option>
+                                    <option value="3">3 People</option>
+                                    <option value="4">4 People</option>
+                                    <option value="5">5 People</option>
+                                    <option value="6">6+ People</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="message">Special Requests</label>
+                            <textarea id="message" name="message" placeholder="Any dietary requirements or special occasions..." rows="4"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary full-width">
+                            <i class="fas fa-calendar-check"></i>
+                            Confirm Reservation
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-main">
+                    <div class="footer-brand">
+                        <div class="footer-logo">
+                            <i class="fas fa-fish"></i>
+                            <span>Fish Burger Essaouira</span>
+                        </div>
+                        <p class="footer-desc">Transforming Atlantic treasures into unforgettable culinary moments through passion, sustainability, and innovation.</p>
+                    </div>
+                    <div class="footer-links">
+                        <div class="link-group">
+                            <h4>Navigation</h4>
+                            <a href="#home">Home</a>
+                            <a href="#gallery">Gallery</a>
+                            <a href="#contact">Contact</a>
+                        </div>
+                        <div class="link-group">
+                            <h4>Legal</h4>
+                            <a href="#">Privacy Policy</a>
+                            <a href="#">Terms of Service</a>
+                            <a href="#">Cookie Policy</a>
+                        </div>
+                        <div class="link-group">
+                            <h4>Contact Info</h4>
+                            <a href="tel:+2125XXXXXXXX">+212 5XX-XXXXXX</a>
+                            <a href="mailto:info@fishburgeressaouira.com">info@fishburgeressaouira.com</a>
+                            <span>Medina, Essaouira</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <div class="footer-copyright">
+                        &copy; 2024 Fish Burger Essaouira. All rights reserved. Crafted with <i class="fas fa-heart"></i> for culinary excellence.
+                    </div>
+                    <div class="footer-payments">
+                        <i class="fab fa-cc-visa"></i>
+                        <i class="fab fa-cc-mastercard"></i>
+                        <i class="fab fa-cc-paypal"></i>
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Enhanced JavaScript for modern functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navbar scroll effect
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Mobile menu toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+
+            // Gallery filtering
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    button.classList.add('active');
+                    
+                    const filterValue = button.getAttribute('data-filter');
+                    
+                    galleryItems.forEach(item => {
+                        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Lightbox functionality
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            const lightboxClose = document.getElementById('lightboxClose');
+            const lightboxPrev = document.getElementById('lightboxPrev');
+            const lightboxNext = document.getElementById('lightboxNext');
+            
+            let currentImageIndex = 0;
+            const galleryImages = Array.from(galleryItems).map(item => ({
+                src: item.querySelector('img').src,
+                alt: item.querySelector('img').alt,
+                title: item.querySelector('h4').textContent,
+                description: item.querySelector('p').textContent
+            }));
+            
+            // Open lightbox when clicking on gallery item
+            galleryItems.forEach((item, index) => {
+                item.addEventListener('click', () => {
+                    currentImageIndex = index;
+                    updateLightboxImage();
+                    lightbox.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // Close lightbox
+            lightboxClose.addEventListener('click', () => {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Navigate lightbox
+            lightboxPrev.addEventListener('click', () => {
+                currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+                updateLightboxImage();
+            });
+            
+            lightboxNext.addEventListener('click', () => {
+                currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+                updateLightboxImage();
+            });
+            
+            // Close lightbox with Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                    lightbox.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            function updateLightboxImage() {
+                const image = galleryImages[currentImageIndex];
+                lightboxImg.src = image.src;
+                lightboxImg.alt = image.alt;
+            }
+
+            // Form validation
+            const contactForm = document.querySelector('.contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Simple validation
+                    const name = document.getElementById('name');
+                    const phone = document.getElementById('phone');
+                    const date = document.getElementById('date');
+                    
+                    let isValid = true;
+                    
+                    if (!name.value.trim()) {
+                        isValid = false;
+                        showError(name, 'Please enter your name');
+                    } else {
+                        removeError(name);
+                    }
+                    
+                    if (!phone.value.trim()) {
+                        isValid = false;
+                        showError(phone, 'Please enter your phone number');
+                    } else {
+                        removeError(phone);
+                    }
+                    
+                    if (!date.value) {
+                        isValid = false;
+                        showError(date, 'Please select a date');
+                    } else {
+                        removeError(date);
+                    }
+                    
+                    if (isValid) {
+                        // In a real application, you would submit the form here
+                        alert('Thank you for your reservation! We will contact you shortly to confirm.');
+                        contactForm.reset();
+                    }
+                });
+            }
+
+            function showError(input, message) {
+                const formGroup = input.closest('.form-group');
+                let error = formGroup.querySelector('.error-message');
+                
+                if (!error) {
+                    error = document.createElement('div');
+                    error.className = 'error-message';
+                    formGroup.appendChild(error);
+                }
+                
+                error.textContent = message;
+                input.style.borderColor = '#ef4444';
+            }
+
+            function removeError(input) {
+                const formGroup = input.closest('.form-group');
+                const error = formGroup.querySelector('.error-message');
+                
+                if (error) {
+                    error.remove();
+                }
+                
+                input.style.borderColor = '';
+            }
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Simple particle effect for hero section
+            const heroParticles = document.getElementById('heroParticles');
+            if (heroParticles) {
+                createParticles();
+            }
+
+            function createParticles() {
+                const particlesCount = 30;
+                
+                for (let i = 0; i < particlesCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.style.position = 'absolute';
+                    particle.style.width = Math.random() * 5 + 2 + 'px';
+                    particle.style.height = particle.style.width;
+                    particle.style.background = 'rgba(255, 255, 255, 0.3)';
+                    particle.style.borderRadius = '50%';
+                    particle.style.top = Math.random() * 100 + '%';
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.animation = `floatParticle ${Math.random() * 10 + 10}s linear infinite`;
+                    
+                    heroParticles.appendChild(particle);
+                }
+                
+                // Add CSS for particle animation
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes floatParticle {
+                        0% {
+                            transform: translateY(0) translateX(0);
+                            opacity: 0;
+                        }
+                        10% {
+                            opacity: 1;
+                        }
+                        90% {
+                            opacity: 1;
+                        }
+                        100% {
+                            transform: translateY(-100vh) translateX(${Math.random() > 0.5 ? '-' : ''}${Math.random() * 100}px);
+                            opacity: 0;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        });
+
+        // Function to scroll to a section
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                window.scrollTo({
+                    top: element.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Form submission handler
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            // Show loading state
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            submitBtn.disabled = true;
+            
+            // Simulate API call
+            setTimeout(() => {
+                // Show success message
+                alert('Reservation confirmed! We look forward to serving you.');
+                e.target.reset();
+                
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
